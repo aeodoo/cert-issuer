@@ -55,7 +55,7 @@ class EthereumServiceProviderConnector(ServiceProviderConnector):
         if hasattr(app_config, 'ropsten_rpc_url'):
             self.ropsten_rpc_url = app_config.ropsten_rpc_url
             rop_provider_list.append(EthereumRPCProvider(self.ropsten_rpc_url))
-        rop_provider_list.append(EtherscanBroadcaster('https://ropsten.etherscan.io/api', etherscan_api_token))
+        rop_provider_list.append(EtherscanBroadcaster('https://api-ropsten.etherscan.io/api', etherscan_api_token))
         rop_provider_list.append(MyEtherWalletBroadcaster('https://api.myetherwallet.com/rop', None))
         self.connectors[Chain.ethereum_ropsten] = rop_provider_list
 
