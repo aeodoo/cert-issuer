@@ -59,6 +59,14 @@ class EthereumServiceProviderConnector(ServiceProviderConnector):
         rop_provider_list.append(MyEtherWalletBroadcaster('https://api.myetherwallet.com/rop', None))
         self.connectors[Chain.ethereum_ropsten] = rop_provider_list
 
+        # Configure Ethereum Goerli testnet connectors
+        goe_provider_list = []
+        if hasattr(app_config, 'goerli_rpc_url'):
+            self.goerli_rpc_url = app_config.goerli_rpc_url
+            goe_provider_list.append(EthereumRPCProvider(self.goerli_rpc_url))
+        goe_provider_list.append(EtherscanBroadcaster('https://api-goerli.etherscan.io/api', etherscan_api_token))
+        self.connectors[Chain.ethereum_goerli] = goe_provider_list
+
     def get_providers_for_chain(self, chain, local_node=False):
         return self.connectors[chain]
 
